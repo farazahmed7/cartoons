@@ -34,11 +34,12 @@ def seasonList(request):
 @api_view(['GET', 'POST', ])
 def episodeList(request):
     if request.method=="POST":
-        cartoonName=str(request.POST['cartoon_name'])
-        seasonName=str(request.POST['season_name'])
-        cartoon=Cartoon.objects.get(name=cartoonName)
-        seasonName=Season.objects.get(cartoon=cartoon)
-        list= seasonName.episode_set.all()
+        cartoon_name=str(request.POST['cartoon_name'])
+        season_name=str(request.POST['season_name'])
+        cartoon=Cartoon.objects.get(name=cartoon_name)
+        seasonName=Season.objects.filter(cartoon=cartoon)
+        a=seasonName.get(season_name=season_name)
+        list= a.episode_set.all()
         ser=EpisodesSerializer(list,many=True)
         return Response(ser.data)
     return HttpResponse("ASda")
