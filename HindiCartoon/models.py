@@ -24,3 +24,11 @@ class Episode(models.Model):
     episode_link=models.CharField(max_length=1000)
     def __str__(self):
         return self.episode_name
+
+
+
+class RequestCartoon(models.Model):
+    name=models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
+

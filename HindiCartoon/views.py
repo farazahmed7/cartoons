@@ -4,7 +4,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
-from HindiCartoon.models import Cartoon, Season
+from HindiCartoon.models import Cartoon, Season, RequestCartoon
 from rest_framework.response import Response
 from HindiCartoon.serializer import CartoonsSerializer, EpisodesSerializer, SeasonsSerializer
 
@@ -42,4 +42,13 @@ def episodeList(request):
         list= a.episode_set.all()
         ser=EpisodesSerializer(list,many=True)
         return Response(ser.data)
+    return HttpResponse("ASda")
+
+
+@csrf_exempt
+@api_view(['GET', 'POST', ])
+def requestCartoon(request):
+    if request.method=="POST":
+        cartoonName=str(request.POST['cartoon_name'])
+        RequestCartoon.objects.create(name=cartoonName)
     return HttpResponse("ASda")
