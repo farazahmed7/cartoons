@@ -13,7 +13,7 @@ from HindiCartoon.serializer import CartoonsSerializer, EpisodesSerializer, Seas
 @api_view(['GET', 'POST', ])
 def cartoonList(request):
     if request.method=="POST":
-        cartoons=Cartoon.objects.all()
+        cartoons=Cartoon.objects.order_by('name').all()
         ser=CartoonsSerializer(cartoons,many=True)
         return Response(ser.data)
     return HttpResponse("Asd")
